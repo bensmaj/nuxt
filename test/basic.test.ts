@@ -98,6 +98,13 @@ describe('route rules', () => {
     await vi.waitFor(() => page.url() === url('/#hello'), { timeout: 5_000 })
   })
 
+  it('client-side navigation should preserve query params when redirecting (#31387)', async () => {
+    const { page } = await renderPage('/')
+    await page.waitForLoadState('networkidle')
+    await page.getByTestId('route-rules-redirect-query').click()
+    await vi.waitFor(() => page.url() === url('/?redirected=true#hello'), { timeout: 5_000 })
+  })
+
   it('should run middleware defined in routeRules config', async () => {
     const html = await $fetch<string>('/route-rules/middleware')
     expect(html).toContain('Hello from routeRules!')

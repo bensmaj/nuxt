@@ -98,6 +98,13 @@
     >
       to redirect page with hash
     </NuxtLink>
+
+    <NuxtLink
+      data-testid="route-rules-redirect-query"
+      to="/route-rules/redirect?redirected=true#hello"
+    >
+      to redirect page with query and hash
+    </NuxtLink>
   </div>
 </template>
 
